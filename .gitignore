@@ -1,0 +1,5 @@
+#mac config file
+.DS_Store
+
+#ignore venv
+/venv
