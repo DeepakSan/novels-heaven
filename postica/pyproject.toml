@@ -5,34 +5,41 @@ build-backend = "hatchling.build"
 [project]
 name = "postica"
 dynamic = ["version"]
-description = ''
+description = 'This is a Backend Microservice built for novels-heaven'
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 license = "MIT"
 keywords = []
 authors = [
-  { name = "U.N. Owen", email = "void@some.where" },
+  { name = "Deepak Sanjay S J", email = "deepaksanjaysj@gmail.com" },
+  { name = "Ajey presand", email = "authortwo@example.com" },
 ]
 classifiers = [
-  "Development Status :: 4 - Beta",
+  "Development Status :: 1 - Planning",
   "Programming Language :: Python",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
+  "Framework :: Celery",
+  "Framework :: Flask",
+  "Framework :: Hatch",
+  "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
-  "Programming Language :: Python :: Implementation :: CPython",
-  "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = []
 
 [project.urls]
-Documentation = "https://github.com/U.N. Owen/postica#readme"
-Issues = "https://github.com/U.N. Owen/postica/issues"
-Source = "https://github.com/U.N. Owen/postica"
+Documentation = "https://github.com/DeepakSan/novels-heaven/blob/main/README.md"
+Issues = "https://github.com/DeepakSan/novels-heaven/issues"
+Source = "https://github.com/DeepakSan/novels-heaven"
 
 [tool.hatch.version]
 path = "src/postica/__about__.py"
+
+[tool.hatch.envs.dev]
+extra-dependencies = []
+
+[tool.hatch.envs.dev.scripts]
+build = 
 
 [tool.hatch.envs.types]
 extra-dependencies = [
