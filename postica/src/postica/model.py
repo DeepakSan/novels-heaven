@@ -8,8 +8,8 @@ class Novel(db.Model):
     chinese_name = db.Column(db.String(50))
     description = db.Column(db.String(1000))
     picture = db.Column(db.LargeBinary)
-    date_edited = db.Column(db.DateTime, nullable=False)
-    date_created = db.Column(db.DateTime, nullable=False)
+    date_edited = db.Column(db.DateTime, nullable=False,default=db.func.now())
+    date_created = db.Column(db.DateTime, nullable=False,default=db.func.now())
     
     chapters = db.relationship('NovelChapter', back_populates='novel', lazy='dynamic')
     
@@ -36,6 +36,7 @@ class NovelChapter(db.Model):
     previous_chapter_id = db.Column(db.Integer, db.ForeignKey('novelchapter.id'), nullable=True)
     next_chapter_id = db.Column(db.Integer, db.ForeignKey('novelchapter.id'), nullable=True)
     chapter_title = db.Column(db.String(50), nullable=False)
+    date_edited = db.Column(db.DateTime, nullable=False,default=db.func.now())
     
     novel = db.relationship('Novel', back_populates='chapters')
     
@@ -65,5 +66,6 @@ class NovelChapter(db.Model):
             'content': self.content,
             'previous_chapter_id': self.previous_chapter_id,
             'next_chapter_id': self.next_chapter_id,
-            'chapter_title': self.chapter_title
+            'chapter_title': self.chapter_title,
+            'date_edited': self.date_edited.isoformat() if self.date_edited else None
         }
