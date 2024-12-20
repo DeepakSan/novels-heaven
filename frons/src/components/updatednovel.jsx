@@ -1,6 +1,38 @@
-import './updatednovel.css'
+import './updatednovel.css';
+import React, { useState, useEffect } from "react";
 
-function  UpdatedNovels({ lastUpdatedNovels }) { 
+function UpdatedNovels() {
+    const [novels, setNovels] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchUpdatedNovels = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/novel/last');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch novels');
+                }
+                const result = await response.json();
+                console.log(result); // Place this after the result is defined
+                setNovels(result);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUpdatedNovels();
+    }, []);
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
+    if (error) {
+        return <p>Error: {error}</p>;
+    }
 
     return (
         <div>
@@ -16,15 +48,15 @@ function  UpdatedNovels({ lastUpdatedNovels }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {newUpdates.map((update, index) => (
+                            {novels.map((update, index) => (
                                 <tr key={index}>
                                     <td>
-                                        <a href={update.link}>{update.novel}</a>
+                                        <a href={`/novels/${update.novel_id}`}>{update.name}</a>
                                     </td>
                                     <td>
-                                        <a href={update.link}>{update.chapter}</a>
+                                        <a href={`/novels/${update.novel_id}/${update.chapter_id}`}>{update.chapter_title}</a>
                                     </td>
-                                    <td>{update.timeAgo}</td>
+                                    <td>{update.date_edited}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -35,4 +67,4 @@ function  UpdatedNovels({ lastUpdatedNovels }) {
     );
 }
 
-export default UpdatedNovels
+export default UpdatedNovels;

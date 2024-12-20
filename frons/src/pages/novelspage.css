@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 60%;
+    margin: 2rem auto;
+    background-color: #fff;
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .novel-details {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2rem;
+  }
+  
+  .novel-image img {
+    width: 200px;
+    height: 300px;
+    border-radius: 5px;
+    object-fit: cover;
+  }
+  
+  .novel-info {
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .novel-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .novel-description {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .chapter-list {
+    margin-top: 1rem;
+  }
+  
+  .chapter-list h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .chapter-list ul {
+    list-style: none;
+    padding: 0;
+    max-height: 600px;
+    overflow-y: auto;
+  }
+  
+  .chapter-list ul li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .chapter-list ul li a {
+    text-decoration: none;
+    color: #007BFF;
+    font-size: 1rem;
+    transition: color 0.2s;
+  }
+  
+  .chapter-list ul li a:hover {
+    color: #0056b3;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+  
+  .pagination a {
+    text-decoration: none;
+    color: #007BFF;
+    padding: 0.5rem 1rem;
+    border: 1px solid #007BFF;
+    margin: 0 0.3rem;
+    border-radius: 5px;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  .pagination a:hover {
+    background-color: #007BFF;
+    color: #fff;
+  }
+  
+  .pagination .active {
+    background-color: #007BFF;
+    color: #fff;
+  }
+  
