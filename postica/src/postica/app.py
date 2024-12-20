@@ -40,8 +40,20 @@ def create_app():
     class FetchAllNovelChapters(Resource):
         def get(self, novelID):
             novelID = [int(id) for id in novelID.split(',')]
-            chapters = db.session.query(model.NovelChapter).filter(model.NovelChapter.novel_id.in_(novelID)).all()
-            return [chapter.to_dict() for chapter in chapters]
+            chapters = (db.session.query(model.NovelChapter.id.label('chapter_id'),model.Novel.id,model.Novel.picture,
+                model.NovelChapter.chapter_title, model.Novel.name,model.Novel.description)
+                        .join(model.Novel, model.Novel.id == model.NovelChapter.novel_id).filter(model.NovelChapter.novel_id.in_(novelID)).all())
+            final = []
+            for chapter in chapters:
+                final.append({
+                    'novel_id': chapter.id,
+                    'chapter_id': chapter.chapter_id,
+                    'name': chapter.name,
+                    'chapter_title': chapter.chapter_title,
+                    'picture': chapter.picture if chapter.picture else None, 
+                    'description': chapter.description
+                })
+            return final
         
     @api.route('/novel/mod')
     class FetchAllNovelOrderByDateModified(Resource):
