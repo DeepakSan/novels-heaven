@@ -6,7 +6,7 @@ from . import model
 from .config import Config
 from .helpers.modifytime import time_ago
 from sqlalchemy.orm import aliased
-
+from flask import request
 
 def create_app():
     app = Flask(__name__)
@@ -91,6 +91,42 @@ def create_app():
                 })
             
             return time_ago(final)
+        
 
+    @api.route('/novel/paginated')
+    class FetchPaginatedNovels(Resource):
+        def get(self):
+            page = int(request.args.get('page', 1))
+            per_page = int(request.args.get('limit', 20))
+            
+            pagination = db.session.query(model.Novel).paginate(page=page, per_page=per_page, error_out=False)
+            
+            final = []
+            for novel in pagination:
+                final.append({
+                'id': novel.id,
+                'name': novel.name,
+                'chinese_name': novel.chinese_name,
+                'picture': novel.picture,
+                })
+            return final
+        
+
+    @api.route('/search')
+    class FetchSearchNovels(Resource):
+        def get(self):
+            search = str(request.args.get('query', 1))
+            
+            data = db.session.query(model.Novel).filter(model.Novel.name.contains(search))
+            
+            final = []
+            for novel in data:
+                final.append({
+                'id': novel.id,
+                'name': novel.name,
+                'chinese_name': novel.chinese_name,
+                'picture': novel.picture,
+                })
+            return final
 
     return app

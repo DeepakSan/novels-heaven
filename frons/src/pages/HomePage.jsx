@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import AppNavbar from "../components/navbar";
 import CardComponent from "../components/cardcomponent";
 import "./homepage.css"; // Import the external CSS file
@@ -69,6 +70,7 @@ function HomePage() {
         <div>
             <AppNavbar />
             <h1 className="home-title">Home Page</h1>
+            
             <div className="container">
                 <h2 className="section-title">Popular Novels</h2>
                 <div className="card-grid">
@@ -81,7 +83,11 @@ function HomePage() {
                         />
                     ))}
                 </div>
+                <div className="read-more-container">
+                    <Link to="/novels/popular" className="read-more-link">Read More</Link>
+                </div>
             </div>
+            
             <div className="container">
                 <h2 className="section-title">Latest Novels</h2>
                 <div className="card-grid">
@@ -94,7 +100,11 @@ function HomePage() {
                         />
                     ))}
                 </div>
+                <div className="read-more-container">
+                    <Link to="/novels/latest" className="read-more-link">Read More</Link>
+                </div>
             </div>
+
             <UpdatedNovels />
         </div>
     );

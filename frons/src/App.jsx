@@ -6,6 +6,8 @@ import SearchPage from './pages/SearchPage';
 import LogIn from './pages/LogIn';
 import SignIn from './pages/SignIn';
 import ChapterPage from './pages/chapterpage';
+import NovelsList from './pages/novellist';
+import NotFoundPage from './pages/notfoundpage';
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/novels/popular" element={<NovelsList />} />
+        <Route path="/novels/latest" element={<NovelsList />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
   );

@@ -18,7 +18,6 @@ const ChapterPage = () => {
           throw new Error('Failed to fetch chapter data');
         }
         const data = await response.json();
-        console.log("Fetched Chapter Data:", data);
         setChapterData(data[0]);
       } catch (err) {
         setError(err.message);
@@ -42,22 +41,14 @@ const ChapterPage = () => {
   }
   
   const {
-    chapter_title,      // "Chapter 3"
-    content,           // "This is the content of Chapter 3 for Novel 1."
-    date_edited,       // "2024-12-19T22:38:42.798502"
-    id,                // 3
-    next_chapter_id,   // 4
-    novel_id,          // 1
-    previous_chapter_id // 2
+    chapter_title,      
+    content,           
+    date_edited,      
+    id,                
+    next_chapter_id,   
+    novel_id,          
+    previous_chapter_id 
     } = chapterData;
-   console.log("Chapter Data:", chapterData);
-   console.log("Chapter title:", chapter_title);
-   console.log("Content:", content);
-   console.log("Date edited:", date_edited);
-   console.log("ID:", id);
-   console.log("Next chapter ID:", next_chapter_id);
-   console.log("Novel ID:", novel_id);
-   console.log("Previous chapter ID:", previous_chapter_id);
 
   const handleNavigation = (nextChapterId) => {
     if (nextChapterId !== null && nextChapterId !== undefined) {
