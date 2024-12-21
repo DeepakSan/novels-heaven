@@ -10,7 +10,7 @@ a {
 }
 
 a:hover {
-    text-decoration: none; 
+    text-decoration: underline; 
 }
 
 .home-title {
@@ -46,4 +46,44 @@ a:hover {
     text-align: center;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.read-more-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+.read-more-link {
+    font-size: 1rem;
+    color: #007bff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.read-more-link:hover {
+    color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    .home-title {
+        font-size: 2em;
+    }
+
+    .section-title {
+        font-size: 1.5em;
+    }
+
+    .read-more-link {
+        font-size: 0.9rem;
+    }
 }

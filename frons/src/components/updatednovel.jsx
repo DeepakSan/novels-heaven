@@ -14,7 +14,6 @@ function UpdatedNovels() {
                     throw new Error('Failed to fetch novels');
                 }
                 const result = await response.json();
-                console.log(result); // Place this after the result is defined
                 setNovels(result);
             } catch (err) {
                 setError(err.message);
