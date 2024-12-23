@@ -4,9 +4,9 @@ class Novel(db.Model):
     __tablename__ = 'novel'
     
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    name = db.Column(db.String(50), nullable=False)
-    chinese_name = db.Column(db.String(50))
-    description = db.Column(db.String(1000))
+    name = db.Column(db.String(1000), nullable=False)
+    chinese_name = db.Column(db.String(1000))
+    description = db.Column(db.String(100000))
     picture = db.Column(db.LargeBinary)
     date_edited = db.Column(db.DateTime, nullable=False,default=db.func.now())
     date_created = db.Column(db.DateTime, nullable=False,default=db.func.now())
@@ -35,7 +35,7 @@ class NovelChapter(db.Model):
     content = db.Column(db.Text, nullable=True)
     previous_chapter_id = db.Column(db.Integer, db.ForeignKey('novelchapter.id'), nullable=True)
     next_chapter_id = db.Column(db.Integer, db.ForeignKey('novelchapter.id'), nullable=True)
-    chapter_title = db.Column(db.String(50), nullable=False)
+    chapter_title = db.Column(db.String(10000), nullable=False)
     date_edited = db.Column(db.DateTime, nullable=False,default=db.func.now())
     
     novel = db.relationship('Novel', back_populates='chapters')
