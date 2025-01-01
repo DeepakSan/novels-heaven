@@ -7,6 +7,11 @@ from .config import Config
 from .helpers.modifytime import time_ago
 from sqlalchemy.orm import aliased
 from flask import request
+from bs4 import BeautifulSoup
+import base64
+
+def image_to_base64(image_data):
+    return base64.b64encode(image_data).decode('utf-8')
 
 def create_app():
     app = Flask(__name__)
@@ -45,13 +50,14 @@ def create_app():
                         .join(model.Novel, model.Novel.id == model.NovelChapter.novel_id).filter(model.NovelChapter.novel_id.in_(novelID)).all())
             final = []
             for chapter in chapters:
+                description = BeautifulSoup(chapter.description, "html.parser").get_text() if chapter.description else None
                 final.append({
                     'novel_id': chapter.id,
                     'chapter_id': chapter.chapter_id,
                     'name': chapter.name,
                     'chapter_title': chapter.chapter_title,
-                    'picture': chapter.picture if chapter.picture else None, 
-                    'description': chapter.description
+                    'picture': image_to_base64(chapter.picture) if chapter.picture else None, 
+                    'description': description
                 })
             return final
         
@@ -107,7 +113,7 @@ def create_app():
                 'id': novel.id,
                 'name': novel.name,
                 'chinese_name': novel.chinese_name,
-                'picture': novel.picture,
+                'picture': image_to_base64(novel.picture) if novel.picture else None,
                 })
             return final
         
@@ -125,7 +131,7 @@ def create_app():
                 'id': novel.id,
                 'name': novel.name,
                 'chinese_name': novel.chinese_name,
-                'picture': novel.picture,
+                'picture': image_to_base64(novel.picture) if novel.picture else None,
                 })
             return final
 

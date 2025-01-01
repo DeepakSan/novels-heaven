@@ -80,9 +80,11 @@ function HomePage() {
                             image={novel.picture ? `data:image/jpeg;base64,${novel.picture}` : "https://picsum.photos/200/300"}
                             link={`/novels/${novel.id}`}
                             title={novel.name}
+                            imageStyle={{ width: "300px", height: "200px", objectFit: "cover" }} // Inline styling for fixed image size
                         />
                     ))}
                 </div>
+
                 <div className="read-more-container">
                     <Link to="/novels/popular" className="read-more-link">Read More</Link>
                 </div>

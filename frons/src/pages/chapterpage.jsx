@@ -74,7 +74,14 @@ const ChapterPage = () => {
         {/* Chapter Content */}
         <div className="chapter-content" style={{ margin: '20px 0' }}>
           <h2>{chapter_title}</h2>
-          <p>{content}</p>
+          {content.split('||LINEBREAK||').map((paragraph, index) => (
+            paragraph.trim() && (
+              <React.Fragment key={index}>
+                <p>{paragraph}</p>
+                <br />
+              </React.Fragment>
+            )
+          ))}
         </div>
 
         {/* Navigation (Bottom) */}

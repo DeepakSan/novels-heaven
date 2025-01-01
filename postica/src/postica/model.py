@@ -1,4 +1,25 @@
 from .extension import db
+import base64
+from bs4 import BeautifulSoup
+
+def image_to_base64(image_data):
+    return base64.b64encode(image_data).decode('utf-8')
+
+def format_html_to_text(html_content):
+    soup = BeautifulSoup(html_content, 'html.parser')
+    
+    content_div = soup.find('div', {'id': 'htmlContent'})
+    if not content_div:
+        return ''
+    
+    for br in content_div.find_all('br'):
+        br.replace_with('||LINEBREAK||')
+    
+    text = content_div.get_text()
+    lines = [line.strip() for line in text.split('\n')]
+    text = '\n\n'.join(line for line in lines if line)
+    
+    return text.strip()
 
 class Novel(db.Model):
     __tablename__ = 'novel'
@@ -21,8 +42,8 @@ class Novel(db.Model):
             'id': self.id,
             'name': self.name,
             'chinese_name': self.chinese_name,
-            'description': self.description,
-            'picture': self.picture,
+            'description': format_html_to_text(self.description) if self.description else None,
+            'picture': image_to_base64(self.picture) if self.picture else None,
             'date_edited': self.date_edited.isoformat() if self.date_edited else None,
             'date_created': self.date_created.isoformat() if self.date_created else None
         }
@@ -60,10 +81,11 @@ class NovelChapter(db.Model):
         return f'<NovelChapter {self.chapter_title}>'
     
     def to_dict(self):
+        description = format_html_to_text(self.content) if self.content else None
         return {
             'id': self.id,
             'novel_id': self.novel_id,
-            'content': self.content,
+            'content': description,
             'previous_chapter_id': self.previous_chapter_id,
             'next_chapter_id': self.next_chapter_id,
             'chapter_title': self.chapter_title,

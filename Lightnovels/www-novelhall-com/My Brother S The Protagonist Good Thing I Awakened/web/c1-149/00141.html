@@ -1,0 +1,288 @@
+
+    <!DOCTYPE html>
+        <html dir="ltr">
+        <head>
+            <meta charset="utf-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <title>Chapter 147 Turning Power To Waste</title>
+            <style>
+                @import url("https://fonts.googleapis.com/css?family=Merriweather:400,400i,700,700i");
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #323235;
+  -webkit-font-smoothing: antialiased;
+}
+
+#content {
+  padding: 10px 20px;
+  max-width: 850px;
+  margin: 10px auto;
+  font-size: 16px;
+  text-align: justify;
+  line-height: 1.8;
+  border-radius: 5px;
+  background-color: #fffff0;
+  box-shadow: 0 0 10px #000, 0 0 0 1px #000;
+  font-family: "Merriweather", Georgia, "Times New Roman", Times, serif;
+}
+
+#content img {
+  width: 100%;
+}
+
+@media (max-width: 925px) {
+  #content {
+    margin: 5px;
+    max-width: auto;
+  }
+}
+
+main {
+  min-height: 500px;
+  padding: 0 10px;
+}
+
+p + br{
+  display: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #555;
+  padding: 10px;
+  margin: 0;
+  text-align: center;
+  line-height: normal;
+}
+
+h1 {
+  color: #333336;
+  font-weight: 300;
+  margin-bottom: 15px;
+}
+
+h1:after {
+  content: "-";
+  margin: 10px 30px;
+  height: 2px;
+  border-radius: 50%;
+  background: #444;
+  display: block;
+  color: transparent;
+}
+
+.link-group {
+  padding: 10px;
+  margin: 15px 0;
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #dee2ef;
+  border: 1px solid #dde;
+}
+
+.link-group .btn {
+  color: #333;
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: Arial, 600;
+  display: inline-block;
+  width: 145px;
+  padding: 5px;
+  text-align: center;
+  background: #f5f5f5;
+  box-shadow: 1px 1px 2px #aac, 0 0 0 1px #ccc;
+  border-radius: 5px;
+}
+
+.link-group .toc {
+  cursor: pointer;
+  color: #323235;
+  width: 100%;
+  max-width: 350px;
+  padding: 8px 12px;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  box-shadow: 1px 1px 2px #aac, 0 0 0 1px #ccc;
+}
+
+.link-group .btn:hover,
+.link-group .toc:hover {
+  background: #ececef;
+}
+
+.link-group .btn:active {
+  box-shadow: 0 0 2px #dee2ef inset, 0 0 0 1px #ccc;
+}
+
+.link-group a {
+  color: #39f;
+  text-decoration: none;
+}
+
+.link-group a[href="#"],
+.link-group a[href="#"]:hover,
+.link-group a[href="#"]:active {
+  color: #888;
+  background: #eee;
+  box-shadow: 0 0 0 1px #ddd;
+}
+
+div#readpos {
+  border-radius: 10px;
+  font-weight: bold;
+  font-family: monospace;
+  color: #770;
+  font-size: 14px;
+  padding: 5px 10px;
+  background: white;
+  box-shadow: 0 0 10px #333, 0 0 0 1px #dde;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  user-select: none;
+  -webkit-user-drag: none;
+  /* min-width: 100px;
+    text-align: right; */
+}
+
+@media print {
+  #content {
+    margin: 0;
+    max-width: none;
+    box-shadow: none;
+  }
+  .link-group {
+    display: none;
+  }
+}
+
+            </style>
+            <script type="text/javascript">
+                let keyPressTimer = null;
+let navigationInterval = null;
+
+function goToHref(el) {
+  if (!el) return;
+  const href = el.getAttribute("href");
+  if (href === "#") return;
+  window.location.href = href;
+}
+
+function startNavigation(direction) {
+  if (direction === "left") {
+    keyPressTimer = setTimeout(() => {
+      navigationInterval = setInterval(() => {
+        goToHref(document.querySelector("a.prev-button"));
+      }, 50);
+    }, 100);
+  } else if (direction === "right") {
+    keyPressTimer = setTimeout(() => {
+      navigationInterval = setInterval(() => {
+        goToHref(document.querySelector("a.next-button"));
+      }, 50);
+    }, 100);
+  }
+}
+
+function stopNavigation() {
+  clearTimeout(keyPressTimer);
+  clearInterval(navigationInterval);
+}
+
+window.addEventListener("keydown", function (evt) {
+  switch (evt.key) {
+    case "ArrowLeft":
+      if (!keyPressTimer && !navigationInterval) {
+        startNavigation("left");
+      }
+      break;
+    case "ArrowRight":
+      if (!keyPressTimer && !navigationInterval) {
+        startNavigation("right");
+      }
+      break;
+    default:
+      break;
+  }
+});
+
+window.addEventListener("keyup", function (evt) {
+  stopNavigation();
+  switch (evt.key) {
+    case "ArrowLeft":
+      goToHref(document.querySelector("a.prev-button"));
+      break;
+    case "ArrowRight":
+      goToHref(document.querySelector("a.next-button"));
+      break;
+    default:
+      break;
+  }
+});
+
+
+// Handle next TOC select
+function addTocSelectListener() {
+  document.querySelectorAll("select.toc").forEach((select) => {
+    select.addEventListener("input", (evt) => {
+      window.location.href = evt.currentTarget.value;
+    });
+  });
+}
+
+// Handle update reading progress on scroll
+let debounceTimeout;
+function debouncedUpdate(evt) {
+  clearTimeout(debounceTimeout);
+  debounceTimeout = setTimeout(() => {
+    var scroll = window.scrollY;
+    var height = document.body.scrollHeight - window.innerHeight + 10;
+    var percent = Math.round((100.0 * scroll) / height);
+    document.getElementById("readpos").innerText = percent + "%";
+  }, 100); // 100ms delay
+}
+
+window.addEventListener("scroll", debouncedUpdate);
+
+window.addEventListener("load", function (evt) {
+  addTocSelectListener();
+});
+
+            </script>
+        </head>
+        <body>
+            <div id="content">
+                
+    <div class="link-group">
+        <a class="btn prev-button" href="00140.html">Previous</a>
+        <select class="toc"><option value="00001.html">Chapter 1: The 30Th Birthday, New Beginning</option><option value="00002.html">Chapter 2: The System Was Really Late</option><option value="00003.html">Chapter 3: Mystic Flame Sect!</option><option value="00004.html">Chapter 4: Ling Meiyu</option><option value="00005.html">Chapter 5: Breaking Off The Engagement!</option><option value="00006.html">Chapter 6: Divorce!</option><option value="00007.html">Chapter 7: My Younger Brother Is A Protagonist!</option><option value="00008.html">Chapter 8: A Display Of Power!</option><option value="00009.html">Chapter 9: System Store!</option><option value="00010.html">Chapter 10: Revealing His Realm!</option><option value="00011.html">Chapter 11: Marrow Cleansing Pills</option><option value="00012.html">Chapter 12: Nascent Soul Realm</option><option value="00013.html">Chapter 13: Annual Genius Competition!</option><option value="00014.html">Chapter 14: Humilation Of Yan Family</option><option value="00015.html">Chapter 15: The Start Of Annual Geniis Competition!</option><option value="00016.html">Chapter 16: Feng Yun'S Power Revealed</option><option value="00017.html">Chapter 17: Feng Clan'S Power</option><option value="00018.html">Chapter 18: Feng Mei Vs Wang Rouxue!</option><option value="00019.html">Chapter 19: Feng Yun'S Luck?</option><option value="00020.html">Chapter 20: Zhao Tianming Vs Feng Jianhong!</option><option value="00021.html">Chapter 21: The Final Of Annual Genius Competition!</option><option value="00022.html">Chapter 22: Feng Yun Vs Yan Zhihao!</option><option value="00023.html">Chapter 23: Feng Yun'S Victory!</option><option value="00024.html">Chapter 24: A Plan Unfolds</option><option value="00025.html">Chapter 25: Preparing For The Storm!</option><option value="00026.html">Chapter 26: Brewing Storm!</option><option value="00027.html">Chapter 27: Feng Clan'S Second Grade Alchemist?</option><option value="00028.html">Chapter 28: Feng Yun'S Alchemy Skill</option><option value="00029.html">Chapter 29: Ethereal Frost Flame</option><option value="00030.html">Chapter 30: The Price Of Healing</option><option value="00031.html">Chapter 31: Pill Market Showdown: Feng Clan'S Triumph</option><option value="00032.html">Chapter 32: Feng Clan'S Secret Out!</option><option value="00033.html">Chapter 33: On A Date!</option><option value="00034.html">Chapter 34: The Assassin'S Gambit</option><option value="00035.html">Chapter 35: Grand Qi Condensation Realm Cultivators Enters!</option><option value="00036.html">Chapter 36: Unveiling The Hidden Strength!</option><option value="00037.html">Chapter 37: Pill Of Ascension!</option><option value="00038.html">Chapter 38: Basic Sword Intent!</option><option value="00039.html">Chapter 39: Power Of Sword Intent</option><option value="00040.html">Chapter 40: The Fall Of The Major Families</option><option value="00041.html">Chapter 41: The Three Major Clans Destroyed</option><option value="00042.html">Chapter 42: The Spoils Of Victory</option><option value="00043.html">Chapter 43: Echoes Of Defeat</option><option value="00044.html">Chapter 44: The Wrath Of Mystic Flame</option><option value="00045.html">Chapter 45: Ling Meiyu'S Thoughts!</option><option value="00046.html">Chapter 46: Wang Yifan Appears</option><option value="00047.html">Chapter 47: Steward Li'S Offer</option><option value="00048.html">Chapter 48: Refusal</option><option value="00049.html">Chapter 49: Eastern Prefecture Gathering</option><option value="00050.html">Chapter 50: Astral Training Pavilion!</option><option value="00051.html">Chapter 51: Stormhowl Valley Beckons</option><option value="00052.html">Chapter 52: Thundercrest Outpost</option><option value="00053.html">Chapter 53: The Classic Act Of Damsel In Distress</option><option value="00054.html">Chapter 54: Navigating Stormhowl Valley</option><option value="00055.html">Chapter 55: Grade-5 Formation</option><option value="00056.html">Chapter 56: Collecting Resources</option><option value="00057.html">Chapter 57: Skyshatter Tiger</option><option value="00058.html">Chapter 58: Leaving Stormhowl Valley</option><option value="00059.html">Chapter 59: Back To Misty Vale City</option><option value="00060.html">Chapter 60: The Eastern Gathering Beckons</option><option value="00061.html">Chapter 61: Qingyun City</option><option value="00062.html">Chapter 62: Arrival At Tianlong Mansion!</option><option value="00063.html">Chapter 63: Confrontation At The Tianlong Mansion</option><option value="00064.html">Chapter 64: Breaking Bai Zhang</option><option value="00065.html">Chapter 65: Tianlong Qi'S Intervention</option><option value="00066.html">Chapter 66: A Costly Compensation</option><option value="00067.html">Chapter 68: Eastern Gathering!</option><option value="00068.html">Chapter 69: Grand Elder Of Spirit Wind Palace</option><option value="00069.html">Chapter 70: Pillar Of Aptitude</option><option value="00070.html">Chapter 71: Ling Meiyu'S Talent!</option><option value="00071.html">Chapter 72: Climbing The Pillar Of Aptitude!</option><option value="00072.html">Chapter 73: Confrontation With Yuan Ziyan!</option><option value="00073.html">Chapter 74: Real Competition Starts Now!</option><option value="00074.html">Chapter 75: The Pressure Of Aspiration</option><option value="00075.html">Chapter 76: Love Rival?</option><option value="00076.html">Chapter 77: Battle For The Top Position</option><option value="00077.html">Chapter 78: Misunderstanding Again?</option><option value="00078.html">Chapter 79: 16Th Step!</option><option value="00079.html">Chapter 80: Feng Mei'S Path To The 17Th Step</option><option value="00080.html">Chapter 81: Rise Of The Phoenix</option><option value="00081.html">Chapter 82: The 17Th Step!</option><option value="00082.html">Chapter 83 Feng Yun'S Ascend</option><option value="00083.html">Chapter 84 The 18Th Step</option><option value="00084.html">Chapter 85 End Of Round One!</option><option value="00085.html">Chapter 86 Azure Sky Chamber Of Commerce!</option><option value="00086.html">Chapter 87 Preparation For Auction!</option><option value="00087.html">Chapter 88 Auction Begins</option><option value="00088.html">Chapter 89 The Bidding Game</option><option value="00089.html">Chapter 90 Skyfire Feather</option><option value="00090.html">Chapter 91 Appeal Of Sixth-Grade Monster Core!</option><option value="00091.html">Chapter 92 High-Level Earth Grade Technique!</option><option value="00092.html">Chapter 93 Another Earth Grade Technique?</option><option value="00093.html">Chapter 94 Is One Million Enough?</option><option value="00094.html">Chapter 95 Third Time Losing</option><option value="00095.html">Chapter 96 Feng Chen'S Shopping Spree!</option><option value="00096.html">Chapter 97 Elemental Ascension Pill</option><option value="00097.html">Chapter 98 Central Domain</option><option value="00098.html">Chapter 99 Making Feng Clan The Strongest</option><option value="00099.html">Chapter 100 An Act Of Hero Saving Beauty?</option><option value="00100.html">Chapter 101 The Hooligans Return</option><option value="00101.html">Chapter 102 The Humbling Of Tianlong Junhao</option><option value="00102.html">Chapter 103 Second Round Of The Eastern Gathering</option><option value="00103.html">Chapter 104 Tianlong Clan'S Scheme!</option><option value="00104.html">Chapter 105 The Arrival Of The Icy Veil Sect</option><option value="00105.html">Chapter 106 The Ice Fairy'S Offer</option><option value="00106.html">Chapter 107 The Ice Fairy'S Dual Invitation</option><option value="00107.html">Chapter 108 Tianlong Qi'S Gamble</option><option value="00108.html">Chapter 109 First Place Of Second Round Of Eastern Gathering</option><option value="00109.html">Chapter 110 Rank 2 Formation Master!</option><option value="00110.html">Chapter 111 Tianlong Ping</option><option value="00111.html">Chapter 112 I Am Third?</option><option value="00112.html">Chapter 113 Third Round Of Eastern Gathering</option><option value="00113.html">Chapter 114 Bai Clan'S Embarrassment</option><option value="00114.html">Chapter 115 Feng Xiaoyu Takes The Stage</option><option value="00115.html">Chapter 116 End Of Third Round Of Eastern Gathering</option><option value="00116.html">Chapter 117: Feng Chen'S Turn!</option><option value="00117.html">Chapter 118 Last Round Of The Eastern Gathering!</option><option value="00118.html">Chapter 119 Stalling The Inevitable</option><option value="00119.html">Chapter 120 Feng Chen Runs Away</option><option value="00120.html">Chapter 121 The Final Sprint</option><option value="00121.html">Chapter 122 The Winner Of The Third Round Of Eastern Gathering</option><option value="00122.html">Chapter 123 Feng Chen Takes The Win!</option><option value="00123.html">Chapter 124 System Is Being Generous</option><option value="00124.html">Chapter 125 The Aftermath Of Victory</option><option value="00125.html">Chapter 129 New Enemy?</option><option value="00126.html">Chapter 130 Getting Toyed By A Phantom Girl</option><option value="00127.html">Chapter 131 Celestial Harmony Necklace</option><option value="00128.html">Chapter 132 Back To Misty Vale City</option><option value="00129.html">Chapter 133 Equality Above All</option><option value="00130.html">Chapter 136: Zhu Shangxian'S Birthday Party</option><option value="00131.html">Chapter 137: Feng Chen'S Heroic Past</option><option value="00132.html">Chapter 138 Feng Chen Comes To The Zhu Clan</option><option value="00133.html">Chapter 139 Reunion With Feng Junxia</option><option value="00134.html">Chapter 140 The Generosity Of The Feng Clan</option><option value="00135.html">Chapter 141 Surrender Before The Fight</option><option value="00136.html">Chapter 142 Bowing To The Inevitable</option><option value="00137.html">Chapter 143 Breaking Through To The Top Nascent Soul</option><option value="00138.html">Chapter 144 The Shadowy Threat</option><option value="00139.html">Chapter 145 Feng Yun Doing His Protagonist Thing</option><option value="00140.html">Chapter 146 Feng Yun And The Lan Clan</option><option value="00141.html" selected>Chapter 147 Turning Power To Waste</option><option value="00142.html">Chapter 148 A Chain Of Humiliation</option><option value="00143.html">Chapter 149 Into The Lan Clan</option><option value="00144.html">Chapter 150 Feng Chen Vs The Lan Clan</option><option value="00145.html">Chapter 151 Lan Clan'S Last Stand</option><option value="00146.html">Chapter 152 Lan Clan Survived?</option><option value="00147.html">Chapter 153 Lan Clan Under My Rule</option><option value="00148.html">Chapter 154 The Disappearance Of Feng Kai And Feng Yue</option><option value="00149.html">Chapter 155 Wang Zhiqing</option></select>
+        <a class="btn next-button"  href="00142.html">Next</a>
+    </div>
+    
+                <main><h1>Chapter 147 Turning Power To Waste</h1><div class="entry-content" id="htmlContent">
+							Chapter 147  Turning Power to Waste In the Feng Clan's main hall, a group of seven cultivators stood, their robes bearing the insignia of the Lan Clan. <br/><br/>Their leader, a middle-aged man with sharp features and an air of superiority, scanned the surroundings with disdain. <br/><br/>"Hmph! So this is the home of that damn Feng Yun? He must be hiding somewhere here!" <br/><br/>One of the elders sneered, his tone dripping with contempt. <br/><br/>They chased Feng Yun day and night but without success. Moreover, they lost sight of him recently which made them angrier and that's when they formed two groups, one of which was sent to the Feng Clan in search of Feng Yun. <br/><br/>This made the elders hate the Feng Clan as much as Feng Yun. <br/><br/>Also, as someone who lived in the capital, he looked down on those clans from the Eastern Region, dismissing it as a remote and underdeveloped backwater. <br/><br/>"Why must we even wait for some clan leader?" Another elder said irritably. Firstly, they were stopped by some weak guard and now they had to wait? He couldn't be more irritable. <br/><br/>"We should just raze this place to the ground and be done with it!" <br/><br/>Just as the words left his mouth, Feng Chen suddenly appeared without a sound, seated atop the patriarch's throne. His cold gaze swept over the group, making them stiff. It was as though they had been caught trespassing by a predator who considered them nothing more than prey. <br/><br/>The leader stepped forward, trying to hide his unease behind a haughty tone. <br/><br/>"So, you must be Feng Chen, the current Patriarch of the Feng Clan." <br/><br/>Feng Chen didn't respond immediately. His icy eyes continued to assess them. <br/><br/>"And who are you to barge into my home uninvited?" He finally asked, his voice low and laced with menace. <br/><br/>The leader straightened his back, feigning confidence. <br/><br/>"I am Lan Xiang, an elder of the Lan Clan. We've come on official business regarding your younger brother, Feng Yun." <br/><br/>At the mention of Feng Yun's name, a flicker of murderous intent flashed in Feng Chen's eyes.  seaʀᴄh thё ηovёlFire .net website on Google to access chapters of novels early and in the highest quality.<br/><br/>"Patriarch Feng," Lan Xiang continued, "your brother insulted the dignity of the Lan Clan by defeating our prodigy, Lan Jinghao using an underhanded method in public. Such an act cannot go unpunished. We suspect that Feng Clan is hiding Feng Yun and order you to hand him over!" <br/><br/>Lan Xiang didn't really care whether the Feng Clan was hiding Feng Yun and was determined to make them suffer as much as possible. <br/><br/>"And what if I don't comply?" Feng Chen asked, his voice calm yet dripping with scorn. <br/><br/>Lan Xiang's expression hardened. <br/><br/>"We demand that Feng Yun be handed over to the Lan Clan immediately to face justice. If you refuse, it will be considered an act of war against us." <br/><br/>The hall fell silent. Elder Wei's face darkened, and the Feng Clan guards tensed, their gazes shifting to Feng Chen, awaiting his response. <br/><br/>Elder Wei couldn't help but disdain such an arrogant act. Even if they were from the Lan Clan, this was their territory, the Feng Clan's territory. <br/><br/>And how could they casually bring up a war between the clan when it was only a fight between two younger generations. <br/><br/>"Hahaha… " <br/><br/>Feng Chen chuckled, a low, dangerous sound that sent a shiver through the room. <br/><br/>Lan Clan members were confused by Fen Chen's reaction which was quite different than they imagined. <br/><br/>"Hand over Feng Yun? You must have lost your mind." <br/><br/>Lan Xiang glared at him. "Do not take this lightly, Patriarch Feng. The Lan Clan will not tolerate—" <br/><br/>Before he could finish, a blur appeared before him. Feng Chen's movement was so fast that none of the Lan Clan members could react including Lan Xiang who is in Mid Three Elements Divine Realm. <br/><br/>SLAP! <br/><br/>Lan Xiang's head snapped to the side as Feng Chen's palm connected with brutal force, sending the elder sprawling to the floor. Blood trickled from the corner of his mouth as he groaned in pain. <br/><br/>The other elders roared in outrage, launching themselves at Feng Chen. <br/><br/>"Impudent!" <br/><br/>"You dare strike an elder of the Lan Clan?!" <br/><br/>Their fury was short-lived. Feng Chen moved like a phantom, weaving through them effortlessly. <br/><br/>BANG! BOOM! PLAH! <br/><br/>One by one, the elders were struck down, each blow sending them crashing to the ground. Groans of pain echoed through the hall as their arrogance and composure shattered. <br/><br/>Feng Chen stood tall amidst the fallen cultivators, his gaze colder than ice. <br/><br/>"I thought the Lan Clan had standards, but it seems you're no better than a pack of rabid dogs," he said sharply. <br/><br/>Lan Xiang struggled to rise, his face contorted with humiliation and rage. <br/><br/>"Y-You dare humiliate the Lan Clan like this! You'll regret—" <br/><br/>BANG! <br/><br/>Feng Chen's foot came down on Lan Xiang's chest, pinning him to the ground effortlessly. The elder gasped, choking on his words under the weight of Feng Chen's pressure. <br/><br/>"Regret?" Feng Chen's voice was low and merciless. "You come into my home, injure my family, and demand I hand over my brother as if you have the power to dictate terms here? If anyone should regret their actions, it's you!" <br/><br/>The rest of the Lan Clan group lay sprawled on the floor, trembling in fear. <br/><br/>They had heard rumors about Feng Chen and his strength, however, rumors are always exaggerated and they thought they could take on Feng Clan themselves, much less Feng Chen. <br/><br/>But who could have thought, they are the one having their A** whooped. <br/><br/>"I haven't even begun discussing what punishment you deserve for daring to harm my brother." <br/><br/>Feng Chen continued coldly. "And you dare come here demanding justice? The Lan Clan is laughably self-righteous." <br/><br/>One of the remaining elders tried to muster some bravado. "Feng Clan leader, we warn you—apologize for what you've done, or else—" <br/><br/>"Or else what?" Feng Chen interrupted, his icy glare freezing the elder in place. "Still haven't learned your lesson?" <br/><br/>He moved again, delivering another round of humiliation. The Lan Clan cultivators were left groaning on the floor, their spirits crushed. <br/><br/>Elder Wei, observing the scene, couldn't help but shake his head. He wasn't even surprised by the outcome. After all, Feng Chen had faced stronger groups in the past and crushed them just as effortlessly. <br/><br/>"These fools didn't stand a chance." Elder Wei muttered to himself, noting that only two of the seven were in the Three Elements Divine Realm, while the others were merely in the Grand Qi Condensation Realm. <br/><br/>It was as though they had come to their own execution. <br/><br/>"Bring in those guards that these fools have injured." At his command, Feng Clan guards entered the hall. Though their injuries had not fully healed, the healing pills provided by the clan's alchemist had managed to restore their ability to move. <br/><br/>The guards' eyes burned with satisfaction as they beheld the pitiful state of the Lan Clan elders. These intruders, who had so arrogantly attacked them, now lay sprawled on the floor like broken marionettes. <br/><br/>This is Karma! <br/><br/>"You dared to harm my clan," Feng Chen said, his voice low and menacing, "and today, you will know the consequence for it." <br/><br/>Lan Xiang, still pinned under Feng Chen's foot, glared up at him, spitting blood. <br/><br/>"You... You can't do this. The Lan Clan will—" <br/><br/>"Will what?" Feng Chen interrupted, his tone icy. "Send more of your trash here to be humiliated? Don't waste your breath. After dealing with you all, I will go after the Lan Clan myself!" <br/><br/>Feng Chen lifted his hand, and a powerful wave of spiritual energy erupted from him, swirling through the hall. "This is your punishment." <br/><br/>Feng Chen's palm glowed with a brilliant light, suffused with an oppressive aura that struck fear into their hearts. One by one, he reached out to the fallen elders of Lan Clan. <br/><br/>Crack! <br/><br/>A piercing sound echoed as Feng Chen shattered the dantian of the first elder. <br/><br/>The man screamed in agony, his connection to spiritual energy severed, leaving him a mere mortal. <br/><br/>"Those who dare harm my clan will be reduced to nothing." <br/><br/>The other elders scrambled backward, terror etched into their faces. <br/><br/>"Please! Patriarch Feng, spare us!" <br/><br/>"Mercy! We were only following orders!" <br/><br/>… <br/><br/>After the first elder had been completely turned into waste, the others realized that Feng Chen didn't care about their clan and wanted to really end them as cultivators. <br/><br/>They immediately threw away their pride and arrogance and began begging. <br/><br/>However, their pleas fell on deaf ears. Feng Chen wasn't going to spare any of them as he quickly destroyed the dantian of elders one by one. <br/><br/>The screams of the Lan Clan cultivators echoed through the hall, but no one dared to intervene. <br/><br/>Lan Xiang was the last. His face was pale, and his arrogance had been completely stripped away. <br/><br/>"Feng Chen, you'll regret this! The Lan Clan will—" <br/><br/>CRACK! <br/><br/>Feng Chen shattered Lan Xiang's dantian with a single strike. The elder collapsed, his body trembling as he realized the full weight of his fate. <br/><br/>He went from being a Three Elements Divine Realm to becoming a Waste!						</div></main>
+                
+    <div class="link-group">
+        <a class="btn prev-button" href="00140.html">Previous</a>
+        <select class="toc"><option value="00001.html">Chapter 1: The 30Th Birthday, New Beginning</option><option value="00002.html">Chapter 2: The System Was Really Late</option><option value="00003.html">Chapter 3: Mystic Flame Sect!</option><option value="00004.html">Chapter 4: Ling Meiyu</option><option value="00005.html">Chapter 5: Breaking Off The Engagement!</option><option value="00006.html">Chapter 6: Divorce!</option><option value="00007.html">Chapter 7: My Younger Brother Is A Protagonist!</option><option value="00008.html">Chapter 8: A Display Of Power!</option><option value="00009.html">Chapter 9: System Store!</option><option value="00010.html">Chapter 10: Revealing His Realm!</option><option value="00011.html">Chapter 11: Marrow Cleansing Pills</option><option value="00012.html">Chapter 12: Nascent Soul Realm</option><option value="00013.html">Chapter 13: Annual Genius Competition!</option><option value="00014.html">Chapter 14: Humilation Of Yan Family</option><option value="00015.html">Chapter 15: The Start Of Annual Geniis Competition!</option><option value="00016.html">Chapter 16: Feng Yun'S Power Revealed</option><option value="00017.html">Chapter 17: Feng Clan'S Power</option><option value="00018.html">Chapter 18: Feng Mei Vs Wang Rouxue!</option><option value="00019.html">Chapter 19: Feng Yun'S Luck?</option><option value="00020.html">Chapter 20: Zhao Tianming Vs Feng Jianhong!</option><option value="00021.html">Chapter 21: The Final Of Annual Genius Competition!</option><option value="00022.html">Chapter 22: Feng Yun Vs Yan Zhihao!</option><option value="00023.html">Chapter 23: Feng Yun'S Victory!</option><option value="00024.html">Chapter 24: A Plan Unfolds</option><option value="00025.html">Chapter 25: Preparing For The Storm!</option><option value="00026.html">Chapter 26: Brewing Storm!</option><option value="00027.html">Chapter 27: Feng Clan'S Second Grade Alchemist?</option><option value="00028.html">Chapter 28: Feng Yun'S Alchemy Skill</option><option value="00029.html">Chapter 29: Ethereal Frost Flame</option><option value="00030.html">Chapter 30: The Price Of Healing</option><option value="00031.html">Chapter 31: Pill Market Showdown: Feng Clan'S Triumph</option><option value="00032.html">Chapter 32: Feng Clan'S Secret Out!</option><option value="00033.html">Chapter 33: On A Date!</option><option value="00034.html">Chapter 34: The Assassin'S Gambit</option><option value="00035.html">Chapter 35: Grand Qi Condensation Realm Cultivators Enters!</option><option value="00036.html">Chapter 36: Unveiling The Hidden Strength!</option><option value="00037.html">Chapter 37: Pill Of Ascension!</option><option value="00038.html">Chapter 38: Basic Sword Intent!</option><option value="00039.html">Chapter 39: Power Of Sword Intent</option><option value="00040.html">Chapter 40: The Fall Of The Major Families</option><option value="00041.html">Chapter 41: The Three Major Clans Destroyed</option><option value="00042.html">Chapter 42: The Spoils Of Victory</option><option value="00043.html">Chapter 43: Echoes Of Defeat</option><option value="00044.html">Chapter 44: The Wrath Of Mystic Flame</option><option value="00045.html">Chapter 45: Ling Meiyu'S Thoughts!</option><option value="00046.html">Chapter 46: Wang Yifan Appears</option><option value="00047.html">Chapter 47: Steward Li'S Offer</option><option value="00048.html">Chapter 48: Refusal</option><option value="00049.html">Chapter 49: Eastern Prefecture Gathering</option><option value="00050.html">Chapter 50: Astral Training Pavilion!</option><option value="00051.html">Chapter 51: Stormhowl Valley Beckons</option><option value="00052.html">Chapter 52: Thundercrest Outpost</option><option value="00053.html">Chapter 53: The Classic Act Of Damsel In Distress</option><option value="00054.html">Chapter 54: Navigating Stormhowl Valley</option><option value="00055.html">Chapter 55: Grade-5 Formation</option><option value="00056.html">Chapter 56: Collecting Resources</option><option value="00057.html">Chapter 57: Skyshatter Tiger</option><option value="00058.html">Chapter 58: Leaving Stormhowl Valley</option><option value="00059.html">Chapter 59: Back To Misty Vale City</option><option value="00060.html">Chapter 60: The Eastern Gathering Beckons</option><option value="00061.html">Chapter 61: Qingyun City</option><option value="00062.html">Chapter 62: Arrival At Tianlong Mansion!</option><option value="00063.html">Chapter 63: Confrontation At The Tianlong Mansion</option><option value="00064.html">Chapter 64: Breaking Bai Zhang</option><option value="00065.html">Chapter 65: Tianlong Qi'S Intervention</option><option value="00066.html">Chapter 66: A Costly Compensation</option><option value="00067.html">Chapter 68: Eastern Gathering!</option><option value="00068.html">Chapter 69: Grand Elder Of Spirit Wind Palace</option><option value="00069.html">Chapter 70: Pillar Of Aptitude</option><option value="00070.html">Chapter 71: Ling Meiyu'S Talent!</option><option value="00071.html">Chapter 72: Climbing The Pillar Of Aptitude!</option><option value="00072.html">Chapter 73: Confrontation With Yuan Ziyan!</option><option value="00073.html">Chapter 74: Real Competition Starts Now!</option><option value="00074.html">Chapter 75: The Pressure Of Aspiration</option><option value="00075.html">Chapter 76: Love Rival?</option><option value="00076.html">Chapter 77: Battle For The Top Position</option><option value="00077.html">Chapter 78: Misunderstanding Again?</option><option value="00078.html">Chapter 79: 16Th Step!</option><option value="00079.html">Chapter 80: Feng Mei'S Path To The 17Th Step</option><option value="00080.html">Chapter 81: Rise Of The Phoenix</option><option value="00081.html">Chapter 82: The 17Th Step!</option><option value="00082.html">Chapter 83 Feng Yun'S Ascend</option><option value="00083.html">Chapter 84 The 18Th Step</option><option value="00084.html">Chapter 85 End Of Round One!</option><option value="00085.html">Chapter 86 Azure Sky Chamber Of Commerce!</option><option value="00086.html">Chapter 87 Preparation For Auction!</option><option value="00087.html">Chapter 88 Auction Begins</option><option value="00088.html">Chapter 89 The Bidding Game</option><option value="00089.html">Chapter 90 Skyfire Feather</option><option value="00090.html">Chapter 91 Appeal Of Sixth-Grade Monster Core!</option><option value="00091.html">Chapter 92 High-Level Earth Grade Technique!</option><option value="00092.html">Chapter 93 Another Earth Grade Technique?</option><option value="00093.html">Chapter 94 Is One Million Enough?</option><option value="00094.html">Chapter 95 Third Time Losing</option><option value="00095.html">Chapter 96 Feng Chen'S Shopping Spree!</option><option value="00096.html">Chapter 97 Elemental Ascension Pill</option><option value="00097.html">Chapter 98 Central Domain</option><option value="00098.html">Chapter 99 Making Feng Clan The Strongest</option><option value="00099.html">Chapter 100 An Act Of Hero Saving Beauty?</option><option value="00100.html">Chapter 101 The Hooligans Return</option><option value="00101.html">Chapter 102 The Humbling Of Tianlong Junhao</option><option value="00102.html">Chapter 103 Second Round Of The Eastern Gathering</option><option value="00103.html">Chapter 104 Tianlong Clan'S Scheme!</option><option value="00104.html">Chapter 105 The Arrival Of The Icy Veil Sect</option><option value="00105.html">Chapter 106 The Ice Fairy'S Offer</option><option value="00106.html">Chapter 107 The Ice Fairy'S Dual Invitation</option><option value="00107.html">Chapter 108 Tianlong Qi'S Gamble</option><option value="00108.html">Chapter 109 First Place Of Second Round Of Eastern Gathering</option><option value="00109.html">Chapter 110 Rank 2 Formation Master!</option><option value="00110.html">Chapter 111 Tianlong Ping</option><option value="00111.html">Chapter 112 I Am Third?</option><option value="00112.html">Chapter 113 Third Round Of Eastern Gathering</option><option value="00113.html">Chapter 114 Bai Clan'S Embarrassment</option><option value="00114.html">Chapter 115 Feng Xiaoyu Takes The Stage</option><option value="00115.html">Chapter 116 End Of Third Round Of Eastern Gathering</option><option value="00116.html">Chapter 117: Feng Chen'S Turn!</option><option value="00117.html">Chapter 118 Last Round Of The Eastern Gathering!</option><option value="00118.html">Chapter 119 Stalling The Inevitable</option><option value="00119.html">Chapter 120 Feng Chen Runs Away</option><option value="00120.html">Chapter 121 The Final Sprint</option><option value="00121.html">Chapter 122 The Winner Of The Third Round Of Eastern Gathering</option><option value="00122.html">Chapter 123 Feng Chen Takes The Win!</option><option value="00123.html">Chapter 124 System Is Being Generous</option><option value="00124.html">Chapter 125 The Aftermath Of Victory</option><option value="00125.html">Chapter 129 New Enemy?</option><option value="00126.html">Chapter 130 Getting Toyed By A Phantom Girl</option><option value="00127.html">Chapter 131 Celestial Harmony Necklace</option><option value="00128.html">Chapter 132 Back To Misty Vale City</option><option value="00129.html">Chapter 133 Equality Above All</option><option value="00130.html">Chapter 136: Zhu Shangxian'S Birthday Party</option><option value="00131.html">Chapter 137: Feng Chen'S Heroic Past</option><option value="00132.html">Chapter 138 Feng Chen Comes To The Zhu Clan</option><option value="00133.html">Chapter 139 Reunion With Feng Junxia</option><option value="00134.html">Chapter 140 The Generosity Of The Feng Clan</option><option value="00135.html">Chapter 141 Surrender Before The Fight</option><option value="00136.html">Chapter 142 Bowing To The Inevitable</option><option value="00137.html">Chapter 143 Breaking Through To The Top Nascent Soul</option><option value="00138.html">Chapter 144 The Shadowy Threat</option><option value="00139.html">Chapter 145 Feng Yun Doing His Protagonist Thing</option><option value="00140.html">Chapter 146 Feng Yun And The Lan Clan</option><option value="00141.html" selected>Chapter 147 Turning Power To Waste</option><option value="00142.html">Chapter 148 A Chain Of Humiliation</option><option value="00143.html">Chapter 149 Into The Lan Clan</option><option value="00144.html">Chapter 150 Feng Chen Vs The Lan Clan</option><option value="00145.html">Chapter 151 Lan Clan'S Last Stand</option><option value="00146.html">Chapter 152 Lan Clan Survived?</option><option value="00147.html">Chapter 153 Lan Clan Under My Rule</option><option value="00148.html">Chapter 154 The Disappearance Of Feng Kai And Feng Yue</option><option value="00149.html">Chapter 155 Wang Zhiqing</option></select>
+        <a class="btn next-button"  href="00142.html">Next</a>
+    </div>
+    
+            </div>
+            <div id="readpos">0%</div>
+        </body>
+    </html>
+    

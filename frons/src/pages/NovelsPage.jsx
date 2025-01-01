@@ -2,6 +2,7 @@ import AppNavbar from "../components/navbar";
 import './novelspage.css';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import React from "react";
 
 function NovelsPage() {
     const { id } = useParams();
@@ -69,7 +70,15 @@ function NovelsPage() {
                     </div>
                     <div className="novel-info">
                         <h1 className="novel-title">{novel[0].name}</h1>
-                        <p className="novel-description">{novel[0].description}</p>
+                        {/* <p className="novel-description">{novel[0].description}</p> */}
+                        {novel[0].description.split('||LINEBREAK||').map((description, index) => (
+                            description.trim() && (
+                            <React.Fragment key={index}>
+                                <p>{description}</p>
+                                <br />
+                            </React.Fragment>
+                            )
+                        ))}
                     </div>
                 </div>
 
